@@ -1,0 +1,57 @@
+1)
+
+Abstraction
+
+Is a process of exposing essential feature of an entity
+while hiding other irrelevant detail.
+
+Abstraction includes adding comments to the code to show the user of the
+program or the coder what is specifically going on in a string of code.
+Since the code is confusing in itself, there is no way for the user to know
+what is going on until someone comments in what is going on. Also variable
+names determine what is going on and good variable names make code easier to
+read.
+
+2)
+
+Encapsulation
+
+We have to take in consideration that Encapsulation is somehow related to
+Data Hiding. Encapsulation is when you hide your modules internal
+data and all other implementation details/mechanism from other modules.
+it is also a way of restricting access to certain properties or component.
+
+This is done by creating private variables and methods within a python
+file so that when someone uses the program they know not to mess with a
+certain section of the code.
+
+3)
+
+Inheritance
+
+Like ther word Inheritance literally means it is a
+practice of passing on property, titles, debts, rights and obligations
+upon the death of an individual.
+in OOP this is somehow true(Except the death of an individual) ,
+where The base class(the existing class sometimes called as the Parent class)
+has properties and methods
+that will be inherited by the sub class
+(somtimes called a subtype or child class) and it can have additional
+properties or methods.
+Inheritance is also a way to use code of an existing objects.
+
+4)
+
+Polymorphism
+
+Just like in biology, Polymorphism refers to the ability
+to take into different forms or stages.A subclass can define
+its own unique behaviour and still share the same functionalities
+or behavior of its parent/base class.Yes, you got it right, 
+subclass can have their own behavior and share
+some behaviour from its parent class BUT!! not vice versa. A parent 
+class cannot have the behaviour of its subclass.
+
+When a subclass is created in python, it can have its own regular methods and
+class variables but still be a child of the parent class and therefore
+inherit some properties of the parent class.
