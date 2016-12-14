@@ -1,0 +1,163 @@
+1.
+a = [1, 10, 14]
+for i in a:
+  print(i)
+1, 10, 14
+
+2.
+a = [1, 10, 14]
+for i in a:
+  print(i, end" ")
+1, 10, 14
+
+3.
+a = [1, 10, 14]
+for i, j in enumerate(a):
+  print(i)
+0, 1
+1, 10
+2, 14
+
+4.
+x = "hello"
+for i in x:
+  print(i, end= " ")
+hello
+
+5.
+a = []
+for i in range(0, 10, 2):
+  a.append(i)
+print(a)
+0, 10, 2
+
+6.
+a = {
+  "name": "Bella Swan",
+  "likes": ["Ed", "Jake"]
+}
+for b in a ["likes"]:
+  print(b)
+Ed, Jake
+
+7.
+a = {
+  42: "Pirates",
+  11: "Ninjas"
+}
+for i, j in a.items():
+  print(j, i)
+0, Pirates
+1, Ninjas
+
+8.
+a = {
+  42: "Pirates",
+  11: "Ninjas"
+}
+for i in a:
+  print(i)
+42, 11
+
+9.
+a = {}
+for i in range(0, 10, 2):
+  a[i] = i * 100 + 11
+print(a)
+11, 1011, 211
+
+10.
+a = {}
+for i in range(0, 4):
+  b = []
+  for j in range(0, 4):
+    b.append(j)
+  a[i] = b
+print(a)
+1, 2, 3, 4
+
+11.
+a = [{
+  "name": "Bella",
+  "race": "Vampire"
+},
+{
+  "name": "Jacob",
+  "race": "Werewolf"
+}]
+for b in a
+  print(b["name"])
+Bella, Jacob
+
+12.
+a = ["apple", "orange", "kiwi", "pear"]
+count = 0
+for fruit in a:
+  if fruit[0] in 'aeiou':
+    continue
+  else:
+    count += 1
+2
+
+13.
+x = 3
+while (x < 10):
+  x = x * 2
+print x
+6
+
+14.
+x= "CS 126"
+ while (x != ""):
+  x = x[1:]
+print(x)
+CS
+
+15.
+mylist = []
+x = 0
+while(not mylist):
+  mylist.append(x)
+  x += x
+print(mylist)
+[0]
+
+16.
+total = 0
+while true:
+  total += 1
+  if total > 10
+    break
+print(total)
+10
+
+17.
+count = 0
+a = 5
+b = 0
+while (a or b):
+  a -= 1
+print(a or b)
+infinite loop?
+
+18.
+animals = ["bear", "cat", "dog"]
+
+while "bear" in animals:
+  print("roar")
+  del animals[-1]
+roar
+
+19.
+nums = []
+while len(num5 < 5)
+  nums.append(len(nums))
+print(nums)
+[0, 1, 2, 3, 4]
+
+20.
+x = "hello"
+while len(x)<16:
+  x = x * 2
+print(x)
+hello hello

@@ -1,0 +1,48 @@
+'''UNDERSTAND THE PROBLEM: The user inputs data into a function which
+calculates how much money a return trip will cost based on the size of their
+gas tank, the cost of gas per gallon, how many miles per gallon they will be
+able to go on one tank, and the number of miles per given trip. The money
+will be in usd and the formula used will be miles per gallon. The car doesn't
+experience issues on the way back. The car will be driving at 60mpg and mpg
+is Calculated when the car is 60mph highway. The gas will be exactly a
+certain dollar value'''
+
+'''PLAN A SOLUTION: Our first parameter will be the length of the return trip.
+This will allow the program to start on the highest level of user input. The
+next parameters are size of the tank, cost of gas, how many miles they can go
+in one tank.'''
+# This first thing we need to do is define the function.
+'''
+
+def trip(miles_traveled, size_of_tank, miles_per_tank, cost_of_gas):
+# then calculate mpg
+# since the user input is a string we have to change the size of tank and miles
+# per tank variables to integers for calculation.
+    size_of_tank = int(size_of_tank)
+    miles_per_tank = int(miles_per_tank)
+    miles_traveled = int(miles_traveled)
+    cost_of_gas = int(cost_of_gas)
+    mpg = miles_per_tank / size_of_tank
+# Calculate the number of gallons that it requires to go the entire length of
+# the trip
+    num_of_gallons = miles_traveled / mpg
+# since we have the numer of gallons needed we can now calculate the cost of
+# the trip.
+    print("$ " + str(num_of_gallons * cost_of_gas))
+# end of the sexy little function
+# Now we want to display the results of the function
+
+'''
+'''
+IMPLEMENTATION AND TESTING: There were no issues running the program. The
+code runs according to plan. There were no issues in how the code operated.
+'''
+'''
+REFLECTION: The problem solving process has continued to make running and
+testing the code a dream. Coming up with a plan to test the solution allowed
+the code to run perfectly the very first time without any ridiculous and
+annoying repetition. At first there was no $ sign at the beginning to specify
+how much MONEY the trip cost and so instead of just print(num_of_gallons
+* cost_of_gas) a dollar sign was added to specify the exact amount of money it
+actually did cost.
+'''o

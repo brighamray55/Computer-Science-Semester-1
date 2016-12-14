@@ -1,0 +1,75 @@
+# UNDERSTAND THE PROBLEM #################################################
+'''
+The user is trying to register for classes next semester and there are a few
+obvious constraints that must be addressed when the student enrolls. One of
+these is that the classes cannot overlap in terms of time and they must be
+at least 10 minutes apart so the student can get to the next class. Perhaps a
+dictionary can be used to determine if the class and their corresponding times
+conflict with other class times. since each class will be an object and have
+different times and what-not, the eq method will check to see if the classes
+are on the same day and if they have the same time as another class, at first
+it will be manual input for the eq method if there is time there will be an
+auto checker to see if each object is the same.
+
+ASSUMPTIONS: User inputs time as a string separated by a dash so that it can
+be checked as a range for each different class. Times for classes are on mwf
+and tth only. Classes are in military time and if the class is scheduled within 15 minutes
+of another it won't be scheduled.
+
+# Top Box ####################################################################
+
+Registrar
+
+# Middle Box #################################################################
+
+.name #for future use
+.time
+.days
+
+# Bottom Box #################################################################
+
+eq(self, other):
+__init__(self, time, days)
+
+'''
+# PLAN THE SOLUTION #######################################################
+
+
+class Registrar():
+
+    def __init__(self, name, time, days):
+        self.name = name
+        self.time = time.split("-")
+        self.time = [float(x) for x in self.time]
+        
+# Always have brackets when looping.
+        
+        self.days = days
+
+    def __eq__(self, other):
+        if self.days == other.days:
+
+# Use this method for finding a range because the range function doesn't actually take in floating point numbers.
+            if (self.time[0] - .25) <= other.time[0] <= (self.time[1] + .25):
+                print( str(self.name) + "  and " + str(other.name) + " " + "either overlap or they are scheduled too close to each other.")
+            elif (self.time[0] - .25) <= other.time[1] <= (self.time[1] + .25):
+                print( str(self.name) + "  and " + str(other.name) + " " + "either overlap or they are scheduled too close to each other.")
+            else:
+                print ( str(self.name) + " and  " + str(other.name) + " " + "can be scheduled")
+            
+
+# Test Object1
+
+Calculus = Registrar("Calculus", "9-10", "mwf")
+print(Calculus.time)
+
+# Test Object2
+
+Geography = Registrar("Geography", "10.5-11", "mwf")
+print(Geography.time)
+
+# Test of the eq method before specialization
+
+Calculus == Geography
+
+
