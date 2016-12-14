@@ -1,0 +1,154 @@
+Lab 9
+Andres Sepulveda, Brigham Ray, Benjamin Couey
+11/10/16
+Section 4
+
+Star Map
+
+1. Understand the Problem:
+
+Inputted into various functions and parsed is the coordinates, names, and identifier number for each individual star is the data from a pure text file. The file must be parsed for each line individually so that each of the stars’ data is implemented in the various functions for displayability. Turtle must be used to show the exact location of the star in the “universe”. Some turtle functions used are .speed() .penup() .pendown(), so on and so forth. Turtle traces out a tiny rectangle of each star on a virtual plane to give the appearance that the user is looking at the milky way. .speed(0) sets the turtle to produce the results as quickly as possible so the user doesn’t have to watch turtle draw in the virtual plane for a very long time.
+
+2. Plan the Solution(including extra credit):
+
+To plot the different stars, 6 different functions will be used to parse and map the data. First, turtle needs to be imported so the stars can be mapped.
+
+Import turtle
+
+The first function reads coordinates from the file. The data within each line of the test file used for parsing is commented within the function. The data is passed through using readlines which returns a list of each individual line as values in the list. A dictionary for each important value is assigned to a well named variable and the data is parsed into those dictionaries according to the position of each value in the list of lists. At first a smaller file will be parsed for easy testing and later the whole file will be parsed once the program runs according to plan.
+
+def read_coords(file):
+   """Take in the file handle for the file of star positions and parse it
+   into three dictonaries:
+   Henry Draper # : (x position, y position)
+   Henry Draper # : magnitude
+   Name(s) : Henry Draper #"""
+   stars = file.readlines()
+   coord_dict = {}
+   mag_dict = {}
+   name_dict = {}
+   for star in stars:
+       data = star.split(" ",6)
+       coord_dict.update({data[3]:(data[0],data[1])})
+       mag_dict.update({data[3]:data[4]})
+       if len(data) > 6:
+           names = data[6].split(";")
+           for name in names:
+               name_dict.update({name.strip() : data[3]})
+   # print(coord_dict)
+   # print(mag_dict)
+   # print(name_dict)
+   return (coord_dict, mag_dict, name_dict)
+
+The second function plots the stars in their respective positions but the magnitude is not yet taken in. This function uses the various turtle methods and a loop with turtle.forward() and turtle.left() so that each individual star is passed through the turtle functions and displayed on the virtual plane. turtle.fill() and turtle.end_fill() fill each star with the turtle.color(“white”, “white”) so that the stars will show on a turtle.bgcolor(“black”).
+
+def plot_plain_stars(picture_size, coordinates_dict):
+   """Plots all the stars in a given dictionary of coordinates"""
+   turtle.bgcolor("black")
+   turtle.speed(0)
+   for star,coords in enumerate(coordinates_dict):
+       turtle.penup()
+       turtle.setx(float(coords[0]) * (picture_size/2))
+       turtle.sety(float(coords[1]) * (picture_size/2))
+       turtle.pendown()
+       print("test b")
+       turtle.begin_fill()
+       for i in range(0,4):
+           turtle.color("white", "white")
+           turtle.forward(2)
+           turtle.left(90)
+       turtle.end_fill()
+
+The third function takes in the same data as the 2nd function but instead of just printing out the same size star for each individual star which all have different sizes, a magnitude variable called mag takes the magnitude value from the magnitudes dictionary returned by the first function and is used to determine the length of turtle.forward() for each individual star. Since the turtle.forward() can only be equal to a max value of 8 we use an if statement to assign the turtle.forward() size a value of 8. Once the size is determined the turtle.forward() now uses the size determined by the magnitude of each star unlike the value of 2 for each star in the 2nd function.
+
+def plot_by_magnitude(picture_size, coordinates_dict, magnitudes_dict):
+   """Plots all the star in a given dictioanry of coordinates with the size of
+   each star varying based upon its magnitude."""
+   turtle.bgcolor("black")
+   turtle.speed(0)
+   for star in coordinates_dict:
+       mag = float(magnitudes_dict[star])
+       turtle.penup()
+       turtle.setx(float(coordinates_dict[star][0]) * (picture_size / 2))
+       turtle.sety(float(coordinates_dict[star][1]) * (picture_size / 2))
+       turtle.pendown()
+       # print("test b")
+       turtle.begin_fill()
+       size = round(10 / (mag + 2))
+       if size > 8:
+           size = 8
+       for i in range(0, 4):
+           turtle.color("white", "white")
+           turtle.forward(size)
+           turtle.left(90)
+       turtle.end_fill()
+
+The 4th function takes in the lines from the constellation text file and parses the data into a dictionary for each star similar to the first function. The new constellation dictionary is returned so the data can be mapped in the plot_constellations function up next.
+
+def read_constellation_lines(file):
+   """Takes in the file handle for a file of connected stars in a
+   constellation and returns a dictionary:
+   Star name : [connected star(s)]"""
+   constellation_dict = {}
+   star_lines = file.readlines()
+   for line in star_lines:
+       stars = line.split(",")
+       # If the star has already been added to the dictionary update its list
+       if stars[0] in constellation_dict:
+           constellation_dict[stars[0]].append(stars[1].strip())
+       # Otherwise add the star to the dictionary
+       else:
+           constellation_dict.update({stars[0]:[stars[1].strip()]})
+   return constellation_dict
+
+The 5th function takes in the data within the constellation dictionary returned from the 4th function and draws a line for each different constellation in the virtual “universe.” A loop is used to go to the x, y coordinates of each star in the constellation to visualize where each constellation lies on the plane. The visualization is done with none other than the beloved turtle.
+
+def plot_constellations(picture_size, star_names, coordinates_dict,
+                       constellations):
+   """Plots the given constellation"""
+   turtle.color("yellow")
+   turtle.penup()
+   for star in constellations:
+       for i in constellations[star]:
+           # With pen lifted, go to the key star in the constellation
+           # dictionary. For each item in the list associated with that key
+           # go to that star with pen down. This will sketch out the lines of
+           # the constellation.
+           turtle.goto(float(coordinates_dict[star_names[star]][0]) *
+                   (picture_size / 2),
+                   float(coordinates_dict[star_names[star]][1]) *
+                   (picture_size / 2))
+           turtle.pendown()
+           turtle.goto(float(coordinates_dict[star_names[i]][0]) *
+                   (picture_size / 2),
+                   float(coordinates_dict[star_names[i]][1]) *
+                   (picture_size / 2))
+           turtle.penup()
+
+The main function, or function 6, calls each of functions 1-5 and reads the files that need to be parsed. Main function is called at the end so the code runs automatically.
+
+def main():
+   star_map = open("star_map.txt","r")
+   coord_dict,mag_dict, name_dict = read_coords(star_map)
+   star_map.close()
+   constellations = open("constellations.txt", "r")
+   constellations_dict = read_constellation_lines(constellations)
+   constellations.close()
+   # plot_plain_stars(10, coord_dict)
+   plot_constellations(500, name_dict, coord_dict, constellations_dict)
+   plot_by_magnitude(500, coord_dict, mag_dict)
+   
+   
+main()
+
+    3. Implementation and Testing:
+
+Upon testing of the code various times during the lab, simple range errors would occur and could be fixed typically by lowering the range of the loop. Sometimes the code called wouldn’t exist, so making sure that when calling keys from a dictionary the loop was looking for the correct code instead of a different, unneeded loop value the code would run properly. Other than that the code ran according to plan and everything ran smoothly.
+
+    4. Reflect and Refactor
+
+Although the code ran according to plan, there were a few things that could have been done beforehand to make it more understandable. In each of the functions there could have been more comments added to show what is going on exactly in each step instead of just a few comments that make the code more understandable, but still too ambiguous. The methods used were according to the lab instructions though and made the code work according to plan as it should. Overall the lab helped to solidify the concept of file parsing, and in this particular instance, use the concept of file parsing to produce something truly amazing.
+
+
+
+
